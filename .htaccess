@@ -10,3 +10,9 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+
+# Deny access to the environment variables. TODO: Is this the most secure way?
+<Files ".env">
+Order Allow,Deny
+Deny from all
+</Files>

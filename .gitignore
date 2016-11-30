@@ -1,5 +1,6 @@
 .DS_Store
-composer.phar
+*.phar
+.env
 vendor
 wp
 wp-content/upgrade
