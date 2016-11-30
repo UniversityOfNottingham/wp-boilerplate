@@ -10,6 +10,7 @@ class WordPressBoilerplate extends TimberSite {
 		add_action('init', array($this, 'register_taxonomies'));
     add_action('init', array($this, 'register_my_menus'));
     add_action('admin_menu', array($this, 'remove_menu_items'));
+    add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
 
     // Remove junk from head.
     remove_action('wp_head', 'rsd_link');
@@ -101,6 +102,15 @@ class WordPressBoilerplate extends TimberSite {
 
   function remove_menu_items(){
     remove_menu_page('edit-comments.php'); // Hide comment menu item.
+  }
+
+  function enqueue_styles() {
+    $file_name = ($_ENV['ENV_NAME'] == 'dev') ? 'style.css' : 'style.min.css';
+    wp_enqueue_style('bp',
+      get_template_directory_uri() . '/' . $file_name,
+      null,
+      wp_get_theme()->get('Version')
+    );
   }
 
 	function add_to_context( $context ) {
